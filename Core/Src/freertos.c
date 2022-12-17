@@ -48,8 +48,10 @@
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
-osThreadId appTaskHandle;
+osThreadId usbTaskHandle;
 osThreadId logServerTaskHandle;
+osThreadId webServerHandle;
+osThreadId mainAppHandle;
 osMessageQId myQueue01Handle;
 osMutexId osMutexPatternHandle;
 osSemaphoreId osSemaphorePatternHandle;
@@ -59,8 +61,10 @@ osSemaphoreId osSemaphorePatternHandle;
 
 /* USER CODE END FunctionPrototypes */
 
-void StartAppTask(void const * argument);
+void StartUsbTask(void const * argument);
 void StartLogServer(void const * argument);
+void StartWebServer(void const * argument);
+void StartMainApp(void const * argument);
 
 extern void MX_USB_HOST_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -167,13 +171,21 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* definition and creation of appTask */
-  osThreadDef(appTask, StartAppTask, osPriorityNormal, 0, 4096);
-  appTaskHandle = osThreadCreate(osThread(appTask), NULL);
+  /* definition and creation of usbTask */
+  osThreadDef(usbTask, StartUsbTask, osPriorityAboveNormal, 0, 2048);
+  usbTaskHandle = osThreadCreate(osThread(usbTask), NULL);
 
   /* definition and creation of logServerTask */
-  osThreadDef(logServerTask, StartLogServer, osPriorityBelowNormal, 0, 128);
+  osThreadDef(logServerTask, StartLogServer, osPriorityLow, 0, 128);
   logServerTaskHandle = osThreadCreate(osThread(logServerTask), NULL);
+
+  /* definition and creation of webServer */
+  osThreadDef(webServer, StartWebServer, osPriorityNormal, 0, 512);
+  webServerHandle = osThreadCreate(osThread(webServer), NULL);
+
+  /* definition and creation of mainApp */
+  osThreadDef(mainApp, StartMainApp, osPriorityAboveNormal, 0, 2048);
+  mainAppHandle = osThreadCreate(osThread(mainApp), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -181,24 +193,24 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartAppTask */
+/* USER CODE BEGIN Header_StartUsbTask */
 /**
-  * @brief  Function implementing the appTask thread.
+  * @brief  Function implementing the usbTask thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartAppTask */
-void StartAppTask(void const * argument)
+/* USER CODE END Header_StartUsbTask */
+void StartUsbTask(void const * argument)
 {
   /* init code for USB_HOST */
   MX_USB_HOST_Init();
-  /* USER CODE BEGIN StartAppTask */
+  /* USER CODE BEGIN StartUsbTask */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END StartAppTask */
+  /* USER CODE END StartUsbTask */
 }
 
 /* USER CODE BEGIN Header_StartLogServer */
@@ -212,8 +224,42 @@ void StartLogServer(void const * argument)
 {
   /* USER CODE BEGIN StartLogServer */
   /* Infinite loop */
-  osStartApp();
+  for(;;)
+  {
+    osDelay(1);
+  }
   /* USER CODE END StartLogServer */
+}
+
+/* USER CODE BEGIN Header_StartWebServer */
+/**
+* @brief Function implementing the webServer thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartWebServer */
+void StartWebServer(void const * argument)
+{
+  /* USER CODE BEGIN StartWebServer */
+  /* Infinite loop */
+  osStartUartServer();
+  /* USER CODE END StartWebServer */
+}
+
+/* USER CODE BEGIN Header_StartMainApp */
+/**
+* @brief Function implementing the mainApp thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartMainApp */
+void StartMainApp(void const * argument)
+{
+  /* USER CODE BEGIN StartMainApp */
+  osStartApp();
+  /* Infinite loop */
+
+  /* USER CODE END StartMainApp */
 }
 
 /* Private application code --------------------------------------------------*/

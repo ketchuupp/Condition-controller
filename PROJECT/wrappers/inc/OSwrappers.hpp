@@ -5,6 +5,8 @@
 #ifndef INC_429TESTS_OSWRAPPERS_HPP
 #define INC_429TESTS_OSWRAPPERS_HPP
 
+#include <i2c.h>
+
 #ifdef __cplusplus
 #define EXTERNC extern "C"
 #else
@@ -12,6 +14,7 @@
 #endif
 
 EXTERNC void osStartApp();
+EXTERNC void osStartUartServer();
 
 #undef EXTERNC
 #endif //INC_429TESTS_OSWRAPPERS_HPP

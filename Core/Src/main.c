@@ -20,6 +20,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "crc.h"
+#include "dma.h"
 #include "dma2d.h"
 #include "i2c.h"
 #include "ltdc.h"
@@ -32,6 +33,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <BMP180.h>
+#include <dht.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <Cwrappers.h>
+
 
 /* USER CODE END Includes */
 
@@ -42,23 +49,42 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+PUTCHAR_PROTOTYPE
+{
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  return ch;
+}
 
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+DHT_t     DHT11;
+bool      DHT11_ok;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
+float Temperature = 0;
+float Pressure = 0;
+float Altitude = 0;
+
+char Temperature1[10];
+char Pressure1[10];
+char Altitude1[10];
+
 
 /* USER CODE END PFP */
 
@@ -95,6 +121,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_CRC_Init();
   MX_DMA2D_Init();
   MX_FMC_Init();
@@ -103,8 +130,12 @@ int main(void)
   MX_SPI5_Init();
   MX_TIM1_Init();
   MX_USART1_UART_Init();
+  MX_TIM14_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-
+//  DHT_init(&DHT11, DHT_Type_DHT11, &htim14, 72, GPIOG, GPIO_PIN_9);
+  uint8_t UART1_rxBuffer[1];
+//  HAL_UART_Receive_DMA(&huart5, UART1_rxBuffer, 1);
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -171,7 +202,18 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if(GPIO_Pin == DHT11.pin)
+  {
+    DHT_pinChangeCallBack(&DHT11);
+  }
+}
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+  uartReceiveGlobalCallback(huart);
+}
 /* USER CODE END 4 */
 
 /**

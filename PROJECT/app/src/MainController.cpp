@@ -5,8 +5,12 @@
 #include "MainController.h"
 #include <debug.hpp>
 
-bool MainController::createControlledObject(std::string name, ConditionSensor *sensor) {
-  if (name.size() == 0) {
+MainController::~MainController() {
+  for (auto ctrlObj: mControlledObjects) delete ctrlObj;
+}
+
+bool MainController::createControlledObject(const std::string& name, IConditionSensor *sensor) {
+  if (name.empty()) {
     TRACE("Name cannot be empty");
     return false;
   }
@@ -23,21 +27,20 @@ bool MainController::createControlledObject(std::string name, ConditionSensor *s
 
   return true;
 }
-
-bool MainController::addOutputDeviceToObject(std::string name, OutputDeviceController *dev,
+// TODO
+bool MainController::addOutputDeviceToObject(const std::string& objName, IOutputDeviceController *dev,
                                              ControlledObject::controlled_by ctrl_by,
                                              ControlledObject::state_device state) {
   ControlledObject *controlled_obj;
   for (auto obj : mControlledObjects){
-    if (obj->getMName() == name)
+    if (obj->getMName() == objName)
       controlled_obj = obj;
   }
 
   if (controlled_obj == nullptr){
 
   }
+  return true;
 }
 
-MainController::~MainController() {
-  for (auto ctrlObj: mControlledObjects) delete ctrlObj;
-}
+

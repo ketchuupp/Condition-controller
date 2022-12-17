@@ -3,6 +3,8 @@
 //
 
 #include "ControlledObject.h"
+
+#include <utility>
 #include "../../common/debug.hpp"
 
 #define MAX_TEMPERATURE 50.f
@@ -10,9 +12,10 @@
 #define MAX_HUMIDITY 100.f
 #define MIN_HUMIDITY 0.f
 
-ControlledObject::ControlledObject(std::string name, ConditionSensor *sensor)
+ControlledObject::ControlledObject(std::string name, IConditionSensor *sensor)
     : mName(name), mSensor(sensor) {
   mDeviceVector.reserve(3);
+  TRACE_ARG("Controlled object %s created", name.c_str());
 }
 
 bool ControlledObject::setTemperature(float temp) {
@@ -81,9 +84,9 @@ bool ControlledObject::setDayTime(struct tm startDay, struct tm endDay) {
   return true;
 }
 
-int ControlledObject::addControlledDevice(std::string name, OutputDeviceController *dev,
-                                          ControlledObject::controlled_by ctr,
-                                          ControlledObject::state_device state) {
+unsigned int ControlledObject::addControlledDevice(std::string name, IOutputDeviceController *dev,
+                                                   ControlledObject::controlled_by ctr,
+                                                   ControlledObject::state_device state) {
   constexpr int return_error = -1;
 
   if (dev == nullptr) {
@@ -91,8 +94,8 @@ int ControlledObject::addControlledDevice(std::string name, OutputDeviceControll
     return return_error;
   }
 
-  int id = mDeviceVector.size() + 1;
-  mDeviceVector.push_back(new output_device{id, name, ctr, state, OFF, dev});
+  auto id = mDeviceVector.size() + 1;
+  mDeviceVector.push_back(new output_device{id, std::move(name), ctr, state, OFF, dev});
   if (mDeviceVector.back() == nullptr)
   {
     TRACE("Cannot create output device controller");
@@ -103,8 +106,11 @@ int ControlledObject::addControlledDevice(std::string name, OutputDeviceControll
 }
 
 void ControlledObject::doAllOperations() {
+  mSensor->readSensor();
   mTemperature = mSensor->getTemperature();
   mHumidity = mSensor->getHumidity();
+//  TRACE_ARG("Temperature: %f", mTemperature);
+
 
   for (auto dev: mDeviceVector) {
     switch (dev->mCtrl) {

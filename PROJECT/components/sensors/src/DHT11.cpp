@@ -7,3 +7,8 @@
 bool DHT11::readSensor() {
   return false;
 }
+
+DHT11::DHT11() {
+//  DHT_init(dht_type, &dht, )
+
+}

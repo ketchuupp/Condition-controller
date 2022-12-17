@@ -8,9 +8,9 @@
 #include "MainController.h"
 #include "cmsis_os.h"
 #include "main.h"
-#include <ConditionSensor.h>
+#include <IConditionSensor.h>
 #include <DHT11.h>
-#include <Gpio.hpp>
+#include <CGpio.hpp>
 
 class App {
 public:
@@ -18,11 +18,21 @@ public:
 
   virtual ~App();
 
-  void run();
+  [[noreturn]] void run();
+
+  void
+  addQueueAppToUartServerHandler(xQueueHandle *queueAppToUartServer) { m_queueAppToUartServer = queueAppToUartServer; }
+
+
 
 private:
-  Gpio mGreenLed{GPIOG, LD3_Pin};
+  xQueueHandle *m_queueAppToUartServer;
+  CGpio mGreenLed{GPIOG, LD3_Pin};
   MainController mMainController;
+
+
+  bool pushMessToQueue(std::string &mess);
+
 };
 
 

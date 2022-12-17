@@ -1,6 +1,6 @@
 
 #include "../inc/dht.h"
-#include "../../../../../Desktop/DHT-master/dhtConf.h"
+#include "../inc/dhtConf.h"
 #include "tim.h"
 
 #if (_DHT_USE_FREERTOS == 1)
@@ -52,6 +52,7 @@ void DHT_input(DHT_t *dht) {
 bool DHT_decode(DHT_t *dht, uint8_t *byteArray) {
   int8_t bit;
   switch (dht->type) {
+    case DHT_Type_DHT11:
     case DHT_Type_DHT21:
     case DHT_Type_AM2301:
     case DHT_Type_AM2305:
@@ -102,6 +103,7 @@ void DHT_init(DHT_t *dht, DHT_Type_t type, TIM_HandleTypeDef *tim, uint16_t time
 bool DHT_readData(DHT_t *dht, float *Temperature, float *Humidity) {
   uint32_t startTime;
   switch (dht->type) {
+    case DHT_Type_DHT11:
     case DHT_Type_DHT21:
     case DHT_Type_AM2301:
     case DHT_Type_AM2305:

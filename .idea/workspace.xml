@@ -15,25 +15,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1ab969c-2457-48aa-8bd4-eb5e0ce9c246" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.clang-format" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PROJECT/app/inc/MainController.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PROJECT/app/src/MainController.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PROJECT/ecu_components/gpio/inc/Gpio.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/OCD_429tests.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Inc/BMP180.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/Src/BMP180.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/app/inc/QueueAppServer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/app/inc/UartServer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/app/src/QueueAppServer.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/app/src/UartServer.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/components/sensors/inc/SensorBMP180.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/components/sensors/src/SensorBMP180.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/drivers/inc/dhtConf.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/ecu_components/inc/CUartDriver.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/ecu_components/inc/CommunicationI2C.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/ecu_components/inc/I_InterfaceI2C.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/ecu_components/src/CUartDriver.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/ecu_components/src/CommunicationI2C.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/wrappers/inc/Cwrappers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PROJECT/wrappers/src/Cwrappers.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/GpioDrv.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/429tests.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/429tests.ioc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32f4xx_it.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/tim.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/tim.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/usart.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/usart.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/GpioDrv.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/dma2d.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/dma2d.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/freertos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/freertos.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/ltdc.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/ltdc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32f4xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/tim.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/tim.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/usart.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/usart.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PROJECT/app/inc/App.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/inc/App.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT/app/inc/ControlledFacility.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/inc/ControlledObject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/app/inc/ControlledObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/inc/ControlledObject.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/app/inc/MainController.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/inc/MainController.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PROJECT/app/src/App.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/src/App.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT/app/src/ControlledFacility.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/src/ControlledObject.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT/components/output_devices/inc/OutputDeviceController.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/output_devices/inc/OutputDeviceController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT/components/sensors/inc/ConditionSensor.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/sensors/inc/ConditionSensor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT/components/sensors/src/ConditionSensor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/sensors/src/ConditionSensor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT/ecu_components/gpio/inc/Gpio.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT/ecu_components/gpio/src/Gpio.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/ecu_components/gpio/src/Gpio.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/app/src/ControlledObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/src/ControlledObject.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/app/src/MainController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/app/src/MainController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/common/debug.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/common/debug.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/components/output_devices/inc/OutputDeviceController.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/output_devices/inc/IOutputDeviceController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/components/output_devices/inc/WiFiSocketController.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/output_devices/inc/WiFiSocketController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/components/sensors/inc/ConditionSensor.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/sensors/inc/IConditionSensor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/components/sensors/inc/DHT11.h" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/sensors/inc/DHT11.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/components/sensors/src/ConditionSensor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/sensors/src/IConditionSensor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/components/sensors/src/DHT11.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/components/sensors/src/DHT11.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/drivers/src/dht.c" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/drivers/src/dht.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/ecu_components/gpio/inc/Gpio.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/ecu_components/inc/CGpio.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/ecu_components/gpio/src/Gpio.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/ecu_components/src/CGpio.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/wrappers/inc/OSwrappers.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/wrappers/inc/OSwrappers.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PROJECT/wrappers/src/OSwrappers.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/PROJECT/wrappers/src/OSwrappers.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1757,9 +1788,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/CMakeLists.txt" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -1777,31 +1805,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.advertisement.text.has.clang-format": "true",
-    "cf.advertisement.text.overridden": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "cmake.loaded.for.project": "true",
-    "last_opened_file_path": "C:/Users/arekc/CLionProjects/controller",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.maddyhome.idea.vim.ui.VimEmulationConfigurable",
-    "structure.view.defaults.are.configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
+    &quot;cf.advertisement.text.overridden&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cmake.loaded.for.project&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/arekc/CLionProjects/controller&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\arekc\CLionProjects\controller" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\arekc\CLionProjects\controller\PROJECT\app\src" />
-      <recent name="C:\Users\arekc\CLionProjects\429tests\PROJECT\components\output_devices\src" />
-      <recent name="C:\Users\arekc\CLionProjects\429tests\PROJECT\app\src" />
-      <recent name="C:\Users\arekc\CLionProjects\429tests\PROJECT\drivers\src" />
-      <recent name="C:\Users\arekc\CLionProjects\429tests\PROJECT\drivers\inc" />
+      <recent name="C:\Users\arekc\CLionProjects\controller\Core\Inc" />
+      <recent name="C:\Users\arekc\CLionProjects\controller\Core\Src" />
+      <recent name="C:\Users\arekc\CLionProjects\controller\PROJECT\ecu_components\src" />
+      <recent name="C:\Users\arekc\CLionProjects\controller\PROJECT\components\sensors\src" />
     </key>
   </component>
   <component name="RunManager" selected="Embedded GDB Server.stmIDE">
@@ -1848,6 +1879,7 @@
     <list>
       <item itemvalue="CMake Application.429tests.elf" />
       <item itemvalue="Embedded GDB Server.stmIDE" />
+      <item itemvalue="OpenOCD Download &amp; Run.OCD 429tests" />
       <item itemvalue="OpenOCD Download &amp; Run.429tests.elf" />
       <item itemvalue="Python tests.Python tests in controller" />
     </list>
@@ -1869,6 +1901,15 @@
       <workItem from="1665925478136" duration="7313000" />
       <workItem from="1667141701375" duration="13937000" />
       <workItem from="1667159622707" duration="9054000" />
+      <workItem from="1667505637330" duration="7379000" />
+      <workItem from="1668244176477" duration="2015000" />
+      <workItem from="1668700433043" duration="508000" />
+      <workItem from="1669473734612" duration="7996000" />
+      <workItem from="1669481822599" duration="3000" />
+      <workItem from="1669481837290" duration="1650000" />
+      <workItem from="1671215171418" duration="19500000" />
+      <workItem from="1671235895128" duration="23000" />
+      <workItem from="1671268783452" duration="29974000" />
     </task>
     <servers />
   </component>
@@ -1885,6 +1926,42 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/PROJECT/drivers/src/dht.c</url>
+          <line>134</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/PROJECT/drivers/src/dht.c</url>
+          <line>131</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/PROJECT/drivers/src/dht.c</url>
+          <line>126</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
+          <line>154</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Core/Src/BMP180.c</url>
+          <line>85</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/PROJECT/app/inc/QueueAppServer.h</url>
+          <line>23</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

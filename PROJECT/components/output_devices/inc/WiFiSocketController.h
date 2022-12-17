@@ -5,9 +5,9 @@
 #ifndef INC_429TESTS_WIFISOCKETCONTROLLER_H
 #define INC_429TESTS_WIFISOCKETCONTROLLER_H
 
-#include "OutputDeviceController.h"
+#include "IOutputDeviceController.h"
 
-class WiFiSocketController : public OutputDeviceController {
+class WiFiSocketController : public IOutputDeviceController {
 
 };
 
