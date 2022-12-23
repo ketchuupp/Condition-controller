@@ -4,6 +4,8 @@
 
 #include "IConditionSensor.h"
 
+
+
 float IConditionSensor::getHumidity() const {
   return mHumidity;
 }

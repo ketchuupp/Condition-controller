@@ -51,12 +51,12 @@ endif ()
 
 include_directories(Core/Inc USB_HOST/App USB_HOST/Target Drivers/STM32F4xx_HAL_Driver/Inc Drivers/STM32F4xx_HAL_Driver/Inc/Legacy Middlewares/Third_Party/FreeRTOS/Source/include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F Middlewares/ST/STM32_USB_Host_Library/Core/Inc Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc Drivers/CMSIS/Device/ST/STM32F4xx/Include Drivers/CMSIS/Include
         PROJECT/app/inc
-        PROJECT/common
         PROJECT/components/output_devices/inc
         PROJECT/components/sensors/inc
         PROJECT/drivers/inc
         PROJECT/ecu_components/inc
         PROJECT/wrappers/inc
+        PROJECT/common
         )
 
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F429xx)

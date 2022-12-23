@@ -3,10 +3,58 @@
 //
 
 #include "MainController.h"
+#include "cmsis_os.h"
 #include <debug.hpp>
+#include <task.h>
+
+TRACE_INIT
 
 MainController::~MainController() {
   for (auto ctrlObj: mControlledObjects) delete ctrlObj;
+}
+
+[[noreturn]] void MainController::run() {
+  TRACE("MAIN CONTROLLER START")
+  for (;;)
+  {
+    osDelay(1000);
+//    std::string mess = "chuj";
+//    sendMessageToMainApp(mess);
+//    TRACE("TEST");
+  }
+}
+
+void MainController::addSendingQueueToMainApp(TaskQueue<char, 10, 100> *sendingQueue) {
+  if (sendingQueue == nullptr) {
+    TRACE("Incoming parameter pass to nullptr");
+    return;
+  }
+  sendingQueueToMainApp = sendingQueue;
+}
+
+bool MainController::sendMessageToMainApp(const std::string &mess) {
+  std::string toSend = name + ' ' + mess;
+  auto status = sendingQueueToMainApp->pushMessage(toSend.c_str());
+  if (status)
+    return true;
+  return false;
+}
+
+void MainController::addReceiveQueue(TaskQueue<char, 10, 100> *receiveQueue) {
+  if (receiveQueue == nullptr) {
+    TRACE("Incoming parameter pass to nullptr");
+    return;
+  }
+  receiveQueueChar = receiveQueue;
+}
+
+bool MainController::getMessFromQueue() {
+  auto result = receiveQueueChar->popMessage();
+  if (!result.has_value())
+    return false;
+
+  queueMessFromTasks.push(result.value());
+  return true;
 }
 
 bool MainController::createControlledObject(const std::string& name, IConditionSensor *sensor) {
@@ -42,5 +90,7 @@ bool MainController::addOutputDeviceToObject(const std::string& objName, IOutput
   }
   return true;
 }
+
+
 
 

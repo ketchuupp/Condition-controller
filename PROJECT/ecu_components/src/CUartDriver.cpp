@@ -4,6 +4,8 @@
 
 #include "CUartDriver.h"
 
+TRACE_INIT
+
 CUartDriver *CUartDriver::instance = nullptr;
 
 CUartDriver::CUartDriver() {
@@ -51,29 +53,39 @@ bool CUartDriver::send(int uartID, const char *mess, size_t size) {
 void CUartDriver::uartCallback(UART_HandleTypeDef *huart) {
   auto receiveDataIT = [=](uartHandler &obj) {
     if (*obj.rxData == '~') {
-      TRACE_ARG("%s", obj.receiveMsg.c_str());
+//      TRACE_ARG("%s", obj.receiveMsg.c_str());
       if (obj.queueMessages.size() == obj.maxQueueSize) {
         TRACE_ARG("UART ID: %d - Unavailable add another message. Queue is overflow.", obj.ID);
         sent_message(obj.ID, "ERROR - the message has not been received");
       } else
-        obj.queueMessages.push(obj.receiveMsg);
+        obj.queueMessages.push(std::move(obj.receiveMsg));
 
       obj.receiveMsg.clear();
     } else {
       obj.receiveMsg += static_cast<char>(*obj.rxData);
     }
 
-
     HAL_UART_Receive_IT(obj.m_uart, obj.rxData, 1);
   };
-
 
   for (auto &uart: uartInstance) {
     if (uart.m_uart == huart)
       receiveDataIT(uart);
   }
+}
 
+std::optional<std::string> CUartDriver::getMessage(int uartID) {
+  for (auto &uart: uartInstance) {
+    if (uart.ID == uartID) {
+      if (uart.queueMessages.empty())
+        return {};
 
+      auto buff = std::move(uart.queueMessages.front());
+      uart.queueMessages.pop();
+      return buff;
+    }
+  }
+  return {};
 }
 
 

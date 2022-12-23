@@ -8,30 +8,36 @@
 #include "MainController.h"
 #include "cmsis_os.h"
 #include "main.h"
+#include "TaskQueue.hpp"
 #include <IConditionSensor.h>
 #include <DHT11.h>
 #include <CGpio.hpp>
+#include <queue>
+#include <ThreadClass.h>
 
 class App {
 public:
   App();
 
-  virtual ~App();
+  ~App();
 
   [[noreturn]] void run();
 
-  void
-  addQueueAppToUartServerHandler(xQueueHandle *queueAppToUartServer) { m_queueAppToUartServer = queueAppToUartServer; }
+  void addSendingQueueToServer(TaskQueue<char, 10, 100> *sendingQueue);
 
-
+  void addReceiveQueue(TaskQueue<char, 10, 100> * receiveQueue);
 
 private:
-  xQueueHandle *m_queueAppToUartServer;
-  CGpio mGreenLed{GPIOG, LD3_Pin};
-  MainController mMainController;
+  TaskQueue<char, 10, 100> *m_receivingQueueChar;
+  TaskQueue<char, 10, 100> *m_sendingQueueToServer;
+  std::queue<std::string> m_queueMessFromTasks;
+  std::string name{"MAIN APP"};
 
+  CGpio m_GreenLed{GPIOG, LD3_Pin};
 
-  bool pushMessToQueue(std::string &mess);
+  bool sendMessageToServer(const std::string &mess);
+
+  bool getMessFromQueue();
 
 };
 

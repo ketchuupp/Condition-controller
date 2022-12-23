@@ -5,7 +5,10 @@
 #include "ControlledObject.h"
 
 #include <utility>
-#include "../../common/debug.hpp"
+#include <debug.hpp>
+#include <task.h>
+
+TRACE_INIT
 
 #define MAX_TEMPERATURE 50.f
 #define MIN_TEMPERATURE 0.f

@@ -50,8 +50,9 @@
 /* USER CODE END Variables */
 osThreadId usbTaskHandle;
 osThreadId logServerTaskHandle;
-osThreadId webServerHandle;
-osThreadId mainAppHandle;
+osThreadId UartServerHandle;
+osThreadId MainAppHandle;
+osThreadId MainControllerHandle;
 osMessageQId myQueue01Handle;
 osMutexId osMutexPatternHandle;
 osSemaphoreId osSemaphorePatternHandle;
@@ -63,8 +64,9 @@ osSemaphoreId osSemaphorePatternHandle;
 
 void StartUsbTask(void const * argument);
 void StartLogServer(void const * argument);
-void StartWebServer(void const * argument);
+void startUartServer(void const * argument);
 void StartMainApp(void const * argument);
+void StartMainController(void const * argument);
 
 extern void MX_USB_HOST_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -179,13 +181,17 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(logServerTask, StartLogServer, osPriorityLow, 0, 128);
   logServerTaskHandle = osThreadCreate(osThread(logServerTask), NULL);
 
-  /* definition and creation of webServer */
-  osThreadDef(webServer, StartWebServer, osPriorityNormal, 0, 512);
-  webServerHandle = osThreadCreate(osThread(webServer), NULL);
+  /* definition and creation of UartServer */
+  osThreadDef(UartServer, startUartServer, osPriorityAboveNormal, 0, 512);
+  UartServerHandle = osThreadCreate(osThread(UartServer), NULL);
 
-  /* definition and creation of mainApp */
-  osThreadDef(mainApp, StartMainApp, osPriorityAboveNormal, 0, 2048);
-  mainAppHandle = osThreadCreate(osThread(mainApp), NULL);
+  /* definition and creation of MainApp */
+  osThreadDef(MainApp, StartMainApp, osPriorityNormal, 0, 512);
+  MainAppHandle = osThreadCreate(osThread(MainApp), NULL);
+
+  /* definition and creation of MainController */
+  osThreadDef(MainController, StartMainController, osPriorityBelowNormal, 0, 512);
+  MainControllerHandle = osThreadCreate(osThread(MainController), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -231,19 +237,20 @@ void StartLogServer(void const * argument)
   /* USER CODE END StartLogServer */
 }
 
-/* USER CODE BEGIN Header_StartWebServer */
+/* USER CODE BEGIN Header_startUartServer */
 /**
-* @brief Function implementing the webServer thread.
+* @brief Function implementing the UartServer thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartWebServer */
-void StartWebServer(void const * argument)
+/* USER CODE END Header_startUartServer */
+void startUartServer(void const * argument)
 {
-  /* USER CODE BEGIN StartWebServer */
-  /* Infinite loop */
+  /* USER CODE BEGIN startUartServer */
   osStartUartServer();
-  /* USER CODE END StartWebServer */
+  /* Infinite loop */
+
+  /* USER CODE END startUartServer */
 }
 
 /* USER CODE BEGIN Header_StartMainApp */
@@ -260,6 +267,22 @@ void StartMainApp(void const * argument)
   /* Infinite loop */
 
   /* USER CODE END StartMainApp */
+}
+
+/* USER CODE BEGIN Header_StartMainController */
+/**
+* @brief Function implementing the MainController thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartMainController */
+void StartMainController(void const * argument)
+{
+  /* USER CODE BEGIN StartMainController */
+  osStartMainController();
+  /* Infinite loop */
+
+  /* USER CODE END StartMainController */
 }
 
 /* Private application code --------------------------------------------------*/

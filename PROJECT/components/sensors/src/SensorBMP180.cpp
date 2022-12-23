@@ -6,13 +6,15 @@
 #include <cmath>
 #include <debug.hpp>
 
+TRACE_INIT
+
 
 SensorBMP180::SensorBMP180(I_InterfaceI2C *i2cHandler) : m_i2cHandler(i2cHandler) {
   read_calliberation_data();
 }
 
 bool SensorBMP180::readSensor() {
-  BMP180_GetPress(3);
+//  BMP180_GetPress(3);
   return BMP180_GetTemp();
 }
 

@@ -15,6 +15,7 @@
 
 EXTERNC void osStartApp();
 EXTERNC void osStartUartServer();
+EXTERNC void osStartMainController();
 
 #undef EXTERNC
 #endif //INC_429TESTS_OSWRAPPERS_HPP
