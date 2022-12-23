@@ -18,7 +18,7 @@ public:
   TaskQueue(T &&) = delete;
   TaskQueue(T &) = delete;
 
-  TaskQueue(const std::string &&name) : m_name(name) {
+  explicit TaskQueue(const std::string &&name) : m_name(name) {
     m_queue = xQueueCreate(queue_size, item_size * sizeof(T));
     if (m_queue == 0) { ;
       //TODO

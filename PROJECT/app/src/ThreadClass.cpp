@@ -5,22 +5,30 @@
 #include "ThreadClass.h"
 #include "debug.hpp"
 
-TRACE_INIT
+TRACE_INIT(ThreadClass.cpp)
 
-void ThreadClass::addReceiveQueue(TaskQueue<char, 10, 100> *receiveQueue) {
-  if (receiveQueue == nullptr) {
+bool ThreadClass::getMessFromQueue() {
+  if (m_receivingQueueChar == nullptr) {
+    TRACE("Receiving queue is pointing to nullptr")
+    return false;
+  }
+
+  while (true) {
+    auto result = m_receivingQueueChar->popMessage();
+    if (!result.has_value())
+      break;
+    m_queueMessFromTasks.push(result.value());
+  }
+
+  return true;
+}
+
+void ThreadClass::addReceiveQueue(TaskQueue<char, 10, 100> *receivingQueue) {
+  if (receivingQueue == nullptr) {
     TRACE("Incoming parameter pass to nullptr");
     return;
   }
 
-  m_receivingQueueChar = receiveQueue;
+  m_receivingQueueChar = receivingQueue;
 }
 
-bool ThreadClass::getMessFromQueue() {
-  auto result = m_receivingQueueChar->popMessage();
-  if (!result.has_value())
-    return false;
-
-  m_queueMessFromTasks.push(result.value());
-  return true;
-}

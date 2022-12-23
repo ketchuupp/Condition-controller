@@ -15,29 +15,20 @@
 #include <queue>
 #include <ThreadClass.h>
 
-class App {
+class App : public ThreadClass {
 public:
   App();
 
-  ~App();
-
-  [[noreturn]] void run();
+  [[noreturn]] void run() override;
 
   void addSendingQueueToServer(TaskQueue<char, 10, 100> *sendingQueue);
 
-  void addReceiveQueue(TaskQueue<char, 10, 100> * receiveQueue);
-
 private:
-  TaskQueue<char, 10, 100> *m_receivingQueueChar;
   TaskQueue<char, 10, 100> *m_sendingQueueToServer;
-  std::queue<std::string> m_queueMessFromTasks;
-  std::string name{"MAIN APP"};
 
   CGpio m_GreenLed{GPIOG, LD3_Pin};
 
   bool sendMessageToServer(const std::string &mess);
-
-  bool getMessFromQueue();
 
 };
 

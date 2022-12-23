@@ -6,7 +6,7 @@
 #include <cmath>
 #include <debug.hpp>
 
-TRACE_INIT
+TRACE_INIT(SensorBMP180.cpp)
 
 
 SensorBMP180::SensorBMP180(I_InterfaceI2C *i2cHandler) : m_i2cHandler(i2cHandler) {

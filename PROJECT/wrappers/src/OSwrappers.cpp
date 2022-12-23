@@ -7,7 +7,7 @@
 #include "MainController.h"
 #include "TaskQueue.hpp"
 
-TRACE_INIT
+TRACE_INIT(OSwrappers.cpp)
 
 
 TaskQueue<char, 10, 100> uartServerReceiveQueue("server");

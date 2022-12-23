@@ -8,7 +8,7 @@
 #include <string>
 #include <algorithm>
 
-TRACE_INIT
+TRACE_INIT(UartServer.cpp)
 
 UartServer *UartServer::instance = nullptr;
 
@@ -47,13 +47,11 @@ UartServer &UartServer::getInstance() {
       } else {
         TRACE_ARG("Unknown command - \"%s\" ", command.c_str());
       }
-
-
     }
 
-    if (!queueMessFromTasks.empty()) {
-      uart->sent_message(uartInstance, queueMessFromTasks.front());
-      queueMessFromTasks.pop();
+    if (!m_queueMessFromTasks.empty()) {
+      uart->sent_message(uartInstance, m_queueMessFromTasks.front());
+      m_queueMessFromTasks.pop();
     }
 
     osDelay(7);
@@ -66,15 +64,6 @@ void UartServer::getMessFromUart() {
     queueFromUart.push(std::move(result.value()));
 }
 
-void UartServer::addReceiveQueue(TaskQueue<char, 10, 100> *receiveQueue) {
-  if (receiveQueue == nullptr) {
-    TRACE("Incoming parameter pass to nullptr");
-    return;
-  }
-
-  receiveQueueChar = receiveQueue;
-}
-
 void UartServer::addSendingQueueToApp(TaskQueue<char, 10, 100> *sendingQueue) {
   if (sendingQueue == nullptr) {
     TRACE("Incoming parameter pass to nullptr");
@@ -82,15 +71,6 @@ void UartServer::addSendingQueueToApp(TaskQueue<char, 10, 100> *sendingQueue) {
   }
 
   sendingQueueToApp = sendingQueue;
-}
-
-bool UartServer::getMessFromQueue() {
-  auto result = receiveQueueChar->popMessage();
-  if (!result.has_value())
-    return false;
-
-  queueMessFromTasks.push(std::move(result.value()));
-  return true;
 }
 
 bool UartServer::sendMessageToApp(const std::string &mess) {

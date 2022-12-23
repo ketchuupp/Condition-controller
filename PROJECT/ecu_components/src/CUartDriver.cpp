@@ -4,7 +4,7 @@
 
 #include "CUartDriver.h"
 
-TRACE_INIT
+TRACE_INIT(CUartDriver.cpp)
 
 CUartDriver *CUartDriver::instance = nullptr;
 

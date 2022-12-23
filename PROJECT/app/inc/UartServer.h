@@ -9,14 +9,13 @@
 #include <queue>
 #include <unordered_map>
 #include "TaskQueue.hpp"
+#include "ThreadClass.h"
 
-class UartServer {
+class UartServer : public ThreadClass {
 public:
   static UartServer &getInstance();
 
-  [[noreturn]] void run();
-
-  void addReceiveQueue(TaskQueue<char, 10, 100> *receiveQueue);
+  [[noreturn]] void run() override;
 
   void addSendingQueueToApp(TaskQueue<char, 10, 100> *sendingQueue);
 
@@ -24,19 +23,14 @@ private:
   constexpr static int uartInstance = 5;
   CUartDriver *uart;
   static UartServer *instance;
-  std::queue<std::string> queueMessFromTasks;
   std::queue<std::string> queueFromUart;
-  TaskQueue<char, 10, 100> *receiveQueueChar;
   TaskQueue<char, 10, 100> *sendingQueueToApp;
 
   UartServer();
 
   void getMessFromUart();
 
-  bool getMessFromQueue();
-
   bool sendMessageToApp(const std::string &mess);
-
 
 };
 

@@ -7,7 +7,7 @@
 //static std::queue<std::string> queueMess;
 xQueueHandle messQueue;
 
-TRACE_INIT
+TRACE_INIT(QueueAppServer.cpp)
 
 //public:
 void QueueAppServer()

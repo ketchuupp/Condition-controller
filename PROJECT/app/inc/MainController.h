@@ -7,42 +7,40 @@
 
 #include "ControlledObject.h"
 #include "TaskQueue.hpp"
+#include "ThreadClass.h"
 #include <IOutputDeviceController.h>
 #include <IConditionSensor.h>
 #include <string>
 #include <queue>
 
-class MainController {
+class MainController : public ThreadClass {
 public:
+  MainController();
   bool createControlledObject(const std::string& name, IConditionSensor *sensor);
 
-  bool addOutputDeviceToObject(const std::string& objName, IOutputDeviceController *dev, ControlledObject::controlled_by ctrl_by,
+  bool addOutputDeviceToObject(const std::string& objName, IOutputDeviceController *dev,
+                               ControlledObject::controlled_by ctrl_by,
                                ControlledObject::state_device state);
 
-  virtual ~MainController();
+  ~MainController() override;
+
   void updateControlledObjectsStates()
   {
-    for (auto &obj : mControlledObjects)
+    for (auto &obj : m_ControlledObjects)
       obj->doAllOperations();
   }
 
   void addSendingQueueToMainApp(TaskQueue<char, 10, 100> *sendingQueue);
 
-  void addReceiveQueue(TaskQueue<char, 10, 100> * receiveQueue);
-
-  [[noreturn]] void run();
+  [[noreturn]] void run() override;
 
 private:
-  std::string name{"MAIN CONTROLLER"};
-  std::queue<std::string> queueMessFromTasks;
-  TaskQueue<char, 10, 100> *receiveQueueChar;
-  TaskQueue<char, 10, 100> *sendingQueueToMainApp;
+  TaskQueue<char, 10, 100> *m_sendingQueueToMainApp;
 
-  std::vector<ControlledObject *> mControlledObjects;
+  std::vector<ControlledObject *> m_ControlledObjects;
 
   bool sendMessageToMainApp(const std::string &mess);
 
-  bool getMessFromQueue();
 };
 
 

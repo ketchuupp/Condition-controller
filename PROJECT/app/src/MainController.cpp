@@ -7,10 +7,14 @@
 #include <debug.hpp>
 #include <task.h>
 
-TRACE_INIT
+TRACE_INIT(MainController.cpp)
+
+MainController::MainController() {
+  m_name = "MAIN CONTROLLER";
+}
 
 MainController::~MainController() {
-  for (auto ctrlObj: mControlledObjects) delete ctrlObj;
+  for (auto ctrlObj: m_ControlledObjects) delete ctrlObj;
 }
 
 [[noreturn]] void MainController::run() {
@@ -29,32 +33,15 @@ void MainController::addSendingQueueToMainApp(TaskQueue<char, 10, 100> *sendingQ
     TRACE("Incoming parameter pass to nullptr");
     return;
   }
-  sendingQueueToMainApp = sendingQueue;
+  m_sendingQueueToMainApp = sendingQueue;
 }
 
 bool MainController::sendMessageToMainApp(const std::string &mess) {
-  std::string toSend = name + ' ' + mess;
-  auto status = sendingQueueToMainApp->pushMessage(toSend.c_str());
+  std::string toSend = m_name + ' ' + mess;
+  auto status = m_sendingQueueToMainApp->pushMessage(toSend.c_str());
   if (status)
     return true;
   return false;
-}
-
-void MainController::addReceiveQueue(TaskQueue<char, 10, 100> *receiveQueue) {
-  if (receiveQueue == nullptr) {
-    TRACE("Incoming parameter pass to nullptr");
-    return;
-  }
-  receiveQueueChar = receiveQueue;
-}
-
-bool MainController::getMessFromQueue() {
-  auto result = receiveQueueChar->popMessage();
-  if (!result.has_value())
-    return false;
-
-  queueMessFromTasks.push(result.value());
-  return true;
 }
 
 bool MainController::createControlledObject(const std::string& name, IConditionSensor *sensor) {
@@ -67,8 +54,8 @@ bool MainController::createControlledObject(const std::string& name, IConditionS
     return false;
   }
 
-  mControlledObjects.push_back(new ControlledObject(name, sensor));
-  if (mControlledObjects.back() == nullptr) {
+  m_ControlledObjects.push_back(new ControlledObject(name, sensor));
+  if (m_ControlledObjects.back() == nullptr) {
     TRACE_ARG("Cannot create controlled object %s", name.c_str());
     return false;
   }
@@ -80,7 +67,7 @@ bool MainController::addOutputDeviceToObject(const std::string& objName, IOutput
                                              ControlledObject::controlled_by ctrl_by,
                                              ControlledObject::state_device state) {
   ControlledObject *controlled_obj;
-  for (auto obj : mControlledObjects){
+  for (auto obj : m_ControlledObjects){
     if (obj->getMName() == objName)
       controlled_obj = obj;
   }
@@ -90,6 +77,8 @@ bool MainController::addOutputDeviceToObject(const std::string& objName, IOutput
   }
   return true;
 }
+
+
 
 
 

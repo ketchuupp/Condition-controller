@@ -11,18 +11,18 @@
 class ThreadClass {
 public:
   ThreadClass() = default;
-  virtual ~ThreadClass();
 
-  [[noreturn]] virtual void run();
+  virtual ~ThreadClass() = default;
 
-  void addReceiveQueue(TaskQueue<char, 10, 100> * m_receivingQueue);
+  virtual void run() {}
+
+  void addReceiveQueue(TaskQueue<char, 10, 100> *receivingQueue);
 
 protected:
-  std::string m_name{};
-
   bool getMessFromQueue();
 
-  TaskQueue<char, 10, 100> *m_receivingQueueChar;
+  std::string m_name{};
+  TaskQueue<char, 10, 100> *m_receivingQueueChar{};
   std::queue<std::string> m_queueMessFromTasks;
 
 private:

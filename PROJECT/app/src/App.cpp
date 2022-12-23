@@ -12,7 +12,8 @@
 #include <Cwrappers.h>
 #include <UartServer.h>
 
-TRACE_INIT
+
+TRACE_INIT(App.cpp)
 
 App::App() {
 
@@ -29,7 +30,6 @@ App::App() {
   for (;;) {
     getMessFromQueue();
     if (!m_queueMessFromTasks.empty()) {
-//      TRACE_ARG("Received message: %s", queueMessFromTasks.front().c_str());
       std::string mess(std::move(m_queueMessFromTasks.front()));
       m_queueMessFromTasks.pop();
       if (mess == "create")
@@ -58,10 +58,6 @@ App::App() {
   }
 }
 
-App::~App() {
-
-}
-
 void App::addSendingQueueToServer(TaskQueue<char, 10, 100> *sendingQueue) {
   if (sendingQueue == nullptr) {
     TRACE("Incoming parameter pass to nullptr");
@@ -72,7 +68,7 @@ void App::addSendingQueueToServer(TaskQueue<char, 10, 100> *sendingQueue) {
 }
 
 bool App::sendMessageToServer(const std::string &mess) {
-  std::string toSend = name + ' ' + mess;
+  std::string toSend = m_name + ' ' + mess;
   auto status = m_sendingQueueToServer->pushMessage(toSend.c_str());
   if (status)
     return true;
@@ -80,21 +76,4 @@ bool App::sendMessageToServer(const std::string &mess) {
   return false;
 }
 
-void App::addReceiveQueue(TaskQueue<char, 10, 100> *receiveQueue) {
-  if (receiveQueue == nullptr) {
-    TRACE("Incoming parameter pass to nullptr");
-    return;
-  }
-
-  m_receivingQueueChar = receiveQueue;
-}
-
-bool App::getMessFromQueue() {
-  auto result = m_receivingQueueChar->popMessage();
-  if (!result.has_value())
-    return false;
-
-  m_queueMessFromTasks.push(result.value());
-  return true;
-}
 

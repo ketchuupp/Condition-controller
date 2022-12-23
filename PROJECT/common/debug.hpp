@@ -16,23 +16,18 @@
 #define TRACE( format, ... )
 #define TRACE(format)
 #else
-//#define TRACE_ARG( format, ... )   printf( "%s::%s(%d) " __FILE__, __FUNCTION__,  __LINE__);      \
-//printf(format, __VA_ARGS__); printf("\r\n")
-//
-//#define TRACE( format )   printf( "%s::%s(%d) " __FILE__, __FUNCTION__,  __LINE__); \
-//printf(format); printf("\r\n")
 
-#define TRACE_INIT static TaskHandle_t xTaskToQuery;
+#define TRACE_INIT(file_name) static const char fn[] = #file_name; static TaskHandle_t xTaskToQuery;
 
 #define TRACE_ARG(format, ...)                                                        \
 {                                                                                     \
-printf( "%s -> %s(%d) " , pcTaskGetName(xTaskToQuery), __FUNCTION__,  __LINE__);      \
+printf( "%s -> %s::%s(%d) " , pcTaskGetName(xTaskToQuery), fn, __FUNCTION__,  __LINE__);      \
 printf(format, __VA_ARGS__); printf("\r\n");                                          \
 }
 
 #define TRACE(format)                                                                 \
 {                                                                                     \
-printf( "%s -> %s(%d) " , pcTaskGetName(xTaskToQuery), __FUNCTION__,  __LINE__);      \
+printf( "%s -> %s::%s(%d) " , pcTaskGetName(xTaskToQuery), fn, __FUNCTION__,  __LINE__);      \
 printf(format); printf("\r\n");                                                       \
 }
 

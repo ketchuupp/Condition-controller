@@ -8,7 +8,7 @@
 #include <debug.hpp>
 #include <task.h>
 
-TRACE_INIT
+TRACE_INIT(ControlledObject.cpp)
 
 #define MAX_TEMPERATURE 50.f
 #define MIN_TEMPERATURE 0.f
